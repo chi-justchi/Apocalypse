@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct ApocalypseApp: App {
+    @StateObject private var authModel = AuthenticationModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if authModel.isAuthenticated {
+                MainTabView()
+            } else {
+                LoginView(authModel: authModel)
+            }
         }
     }
 }
